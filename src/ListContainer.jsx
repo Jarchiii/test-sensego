@@ -2,6 +2,23 @@ import React, { Component } from 'react'
 import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils'
 
 export class ListContainer extends Component {
+    constructor(props) {
+		super(props)
+		this.state = {
+            arrData : Object.values(this.props.data)
+    
+        }
+	}
+    
+
+ 
+
+    changeOrder(e){
+        this.setState({arrData : this.state.arrData.reverse()})
+    }
+
+    
+    
 
 
 
@@ -10,11 +27,12 @@ export class ListContainer extends Component {
 
     render() {
         console.log(this.props.data)
-        const arrData = Object.values(this.props.data)
         return (
-            
+            <div>
+            <button className="order" onClick={() => this.changeOrder()}>inverser l'ordre</button>
+
             <div className="list">
-                {arrData.map(function(element){
+                {this.state.arrData ?  this.state.arrData.map(function(element){
                     return (
                         <div className="pubContainer">
                         <div className="info">
@@ -46,7 +64,8 @@ export class ListContainer extends Component {
                         </div>
                     )
                 }
-                )}
+                ) : "aa"}
+            </div>
             </div>
         )
     }
